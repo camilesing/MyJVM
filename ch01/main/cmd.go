@@ -2,9 +2,9 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"os"
 )
-import "fmt"
-import "os"
 
 type Cmd struct {
 	helpFlag    bool
