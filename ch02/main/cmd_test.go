@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -12,10 +11,14 @@ func TestCmd(t *testing.T) {
 	cmd.XjreOption = javaHome
 	cmd.class = "java.lang.Object"
 	if cmd.versionFlag {
-		fmt.Println("version 0.0.1")
+		t.Log("version 0.0.1")
 	} else if cmd.helpFlag || cmd.class == "" {
 		printUsage()
 	} else {
-		startJVM(cmd)
+		data, err := startJVM(cmd)
+		if err != nil {
+			t.Fatal("What's your problem?")
+		}
+		t.Logf("we get Date %v", data)
 	}
 }
