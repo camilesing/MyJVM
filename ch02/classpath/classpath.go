@@ -14,7 +14,7 @@ type ClassPath struct {
 func Parse(jarOption, cpOption string) *ClassPath {
 	cp := &ClassPath{}
 	cp.parseBootAndExtClasspath(jarOption)
-	cp.parseUserClasspath(jarOption)
+	cp.parseUserClasspath(cpOption)
 	return cp
 }
 
@@ -30,7 +30,7 @@ func (self *ClassPath) ReadClass(className string) ([]byte, Entry, error) {
 }
 
 func (self *ClassPath) String() string {
-	return self.userClassPath.String()
+	return self.bootClasspath.String()
 }
 
 func (self *ClassPath) parseBootAndExtClasspath(jreOption string) {
