@@ -20,6 +20,8 @@ func Parse(classData []byte) (cf *ClassFile, err error) {
 	defer func() {
 		if rc := recover(); rc != nil {
 			var ok bool
+			//这是个强转。因为recover是个空接口，所以可以尝试对它进行转化。如果实现了error的recover，那么则可以强转。ok = true
+			//还有一种写法是err = rc.(error).那么转换失败时，则会引起panic
 			err, ok = rc.(error)
 			if !ok {
 				err = fmt.Errorf("%v", rc)
