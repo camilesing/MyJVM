@@ -11,11 +11,12 @@ func readConstantPool(reader *ClassReader) ConstantPool {
 	cp := make([]ConstantInfo, cpCount)
 	for i := 1; i < cpCount; i++ { //see note, start index with 1
 		cp[i] = readConstantInfo(reader, cp)
-		switch cp[i].(tpye) {
+		switch cp[i].(type) {
 		case *ConstantLongInfo, *ConstantDoubleInfo:
 			i++ //see note, its need 2 index
 		}
 	}
+	return cp
 }
 
 func (self ConstantPool) getConstantInfo(index uint16) ConstantInfo {
@@ -27,13 +28,13 @@ func (self ConstantPool) getConstantInfo(index uint16) ConstantInfo {
 
 func (self ConstantPool) getNameAndType(index uint16) (string, string) {
 	ntInfo := self.getConstantInfo(index).(*ConstantNameAndTypeInfo)
-	name := self.getUtf8(utInfo.nameIndex)
+	name := self.getUtf8(ntInfo.nameIndex)
 	_type := self.getUtf8(ntInfo.descriptorIndex)
 	return name, _type
 }
 
 func (self ConstantPool) getClassName(index uint16) string {
-	calssInfo := self.getConstantInfo(index).(*ConstantClassInfo)
+	classInfo := self.getConstantInfo(index).(*ConstantClassInfo)
 	return self.getUtf8(classInfo.nameIndex)
 }
 

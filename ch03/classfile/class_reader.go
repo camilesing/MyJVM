@@ -42,7 +42,7 @@ func (self *ClassReader) readUint16s() []uint16 {
 	return slice
 }
 
-func (self *ClassReader) readByte(n uint32) []byte {
+func (self *ClassReader) readBytes(n uint32) []byte {
 	bytes := self.data[:n]
 	self.data = self.data[n:]
 	return bytes
