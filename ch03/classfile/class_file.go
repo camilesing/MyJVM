@@ -2,6 +2,7 @@ package classfile
 
 import "fmt"
 
+//class 文件的定义
 type ClassFile struct {
 	//magic uint32
 	minorVersion uint16
