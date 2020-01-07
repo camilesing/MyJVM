@@ -94,7 +94,7 @@ func (self *ClassFile) SuperClassName() string {
 	}
 	return "" //只有java.lang.Object没有超类
 }
-func (self *ClassFile) InterfaceName() []string {
+func (self *ClassFile) InterfaceNames() []string {
 	interfaceNames := make([]string, len(self.interfaces))
 	for i, cpIndex := range self.interfaces {
 		interfaceNames[i] = self.constantPool.getClassName(cpIndex)

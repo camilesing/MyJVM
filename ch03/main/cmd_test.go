@@ -15,10 +15,7 @@ func TestCmd(t *testing.T) {
 	} else if cmd.helpFlag || cmd.class == "" {
 		printUsage()
 	} else {
-		data, err := startJVM(cmd)
-		if err != nil {
-			t.Fatal("What's your problem?")
-		}
-		t.Logf("we get Date %v", data)
+		startJVM(cmd)
+		t.Log("get ClassFile")
 	}
 }

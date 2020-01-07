@@ -6,7 +6,7 @@ type MemberInfo struct {
 	accessFlags     uint16 //访问标志
 	nameIndex       uint16 // 常量池索引
 	descriptorIndex uint16 //字段或方法的描述符在常量池中的索引
-	attributes      []AttribiteInfo //属性表（参数表？）
+	attributes      []AttributeInfo //属性表（参数表？）
 }
 
 func readMembers(reader *ClassReader, cp ConstantPool) []*MemberInfo {

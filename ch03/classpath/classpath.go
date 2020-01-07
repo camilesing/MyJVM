@@ -5,20 +5,20 @@ import (
 	"path/filepath"
 )
 
-type ClassPath struct {
+type Classpath struct {
 	bootClasspath Entry
 	extClasspath  Entry
 	userClassPath Entry
 }
 
-func Parse(jarOption, cpOption string) *ClassPath {
-	cp := &ClassPath{}
+func Parse(jarOption, cpOption string) *Classpath {
+	cp := &Classpath{}
 	cp.parseBootAndExtClasspath(jarOption)
 	cp.parseUserClasspath(cpOption)
 	return cp
 }
 
-func (self *ClassPath) ReadClass(className string) ([]byte, Entry, error) {
+func (self *Classpath) ReadClass(className string) ([]byte, Entry, error) {
 	className = className + ".class"
 	if data, entry, err := self.bootClasspath.readClass(className); err == nil {
 		return data, entry, err
@@ -29,11 +29,11 @@ func (self *ClassPath) ReadClass(className string) ([]byte, Entry, error) {
 	return self.userClassPath.readClass(className)
 }
 
-func (self *ClassPath) String() string {
+func (self *Classpath) String() string {
 	return self.bootClasspath.String()
 }
 
-func (self *ClassPath) parseBootAndExtClasspath(jreOption string) {
+func (self *Classpath) parseBootAndExtClasspath(jreOption string) {
 	jreDir := getJreDir(jreOption)
 	// jre/lib/*
 	jreLibPath := filepath.Join(jreDir, "lib", "*")
@@ -66,7 +66,7 @@ func exists(path string) bool {
 }
 
 //如果用户没有提供-classpath/-cp选项，则使用当前目录作为用户类路径
-func (self *ClassPath) parseUserClasspath(cpOption string) {
+func (self *Classpath) parseUserClasspath(cpOption string) {
 	if cpOption == "" {
 		cpOption = "."
 	}
