@@ -1,5 +1,5 @@
 package runTimeDataArea
 
-type object struct{
+type Object struct{
 
 }
