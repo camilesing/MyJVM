@@ -17,13 +17,13 @@ func NewThread() *Thread {
 }
 
 func (self *Thread) PushFrame(frame *Frame) {
-	return self.stack.push(frame)
+	self.stack.push(frame)
 }
 
 func (self *Thread) PopFrame() *Frame {
 	return self.stack.top()
 }
 
-func (self *Thread)  CurrentFrame() *Frame{
+func (self *Thread) CurrentFrame() *Frame {
 	return self.stack.top()
 }
